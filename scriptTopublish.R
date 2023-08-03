@@ -1603,7 +1603,7 @@ lam.neg
 
 sal.dat<-read.csv("HB_Salamander_robustCJS_edit.csv",
                   header=TRUE) # this is a secondary mark-recapture dataset 
-# 7 individuals (see below) had there stage changed on one ocassion each so as to match the model assumptions
+# 7 individuals (see below) had stages changed so as to match the model assumptions (no stage changes w/in secondary ocassions)
 
 sal.dat2 <- sal.dat %>%
   filter(Species == "GP") %>% # only include G. porphyriticus
