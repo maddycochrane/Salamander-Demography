@@ -5,7 +5,9 @@ The Hydrology-Salamander-Script, includes R code to run both a robust-design Pra
 
 The salamander mark-recapture data used in this analysis are previously published with the Environmental Data Initiative Data Portal at https://doi.org/10.6073/pasta/cd5f5a03df194930bf87eb12157b8182 (Lowe 2022). Headwater stream discharge data is also already available from the Environmental Data Initiative Data Portal at https://doi.org/10.6073/pasta/15b300e96c2d2f9785d0155b3e18b0e9 (USDA Forest Service 2022). 
 
-However, we included all data called in R script in this repository. Salamander capture-recapture data is found at HubbardBrook_SalamanderCaptureRecapture.csv. The file HB_Salamander_robustCJS_edit.csv contains the same capture-recapture information, except  is edited according to the assumptions of a multi-state CJS model instead of a Pradel model. Specifically, this includes changing the stage of salamanders on 7 ocassions so that they did not change from a larvae to an adult across secondary surveys. The column descriptions for these data files include: 
+However, we included all data called in R script in this repository. 
+
+Salamander capture-recapture data is found at HubbardBrook_SalamanderCaptureRecapture.csv. The file HB_Salamander_robustCJS_edit.csv contains the same capture-recapture information, except  is edited according to the assumptions of a multi-state CJS model instead of a Pradel model. Specifically, this includes changing the stage of salamanders on 7 ocassions so that they did not change from a larvae to an adult across secondary surveys. The column descriptions for these data files include: 
 
 ElastomerID: visual implant elastomer ID (NA = no elastomer ID for this individual)
 
@@ -65,7 +67,7 @@ FemurLength: Femur length (mm; NA = missing information)
 
 TailWidth: Tail width (mm; NA = missing information)
 
-TailHeight:Tail height (mm; NA = missing information)
+TailHeight: Tail height (mm; NA = missing information)
 
 Photo: PhotoID (NA = missing information)
 
@@ -77,4 +79,25 @@ Notes: Comments/notes
 
 Remove: Remove capture ocassion due to incorrect ID or incomplete information
 
+
+
+Data on daily discharge across all 9 watersheds at Hubbard Brook from 1956 to 2022 is included as: HBEF_DailyStreamflow_1956-2022.csv. Column descriptions for this file include: 
+
+Date: Date
+
+WS: Watershed (1 - 9)
+
+Streamflow: Daily discharge (mm/day)
+
+
+
+Data on watershed area for stream reaches surveyed in salamander capture-recapture surveys: WatershedArea_for_SalamanderSurveys.csv. Each 500 meter reach was divided into 5 100 meter reaches, with watershed area calculated in the middle of each 100 meters (e.g. at 50, 150, 250, 350, and 450 m). Column descriptions for this file include: 
+
+Site: site abbreviation (l at beginning = lower; u at beginning = upper; b = bear; par = paradise; zz = zigzag; number at end = longtidunal location along 500 m reach). 
+
+Area_km2: Watershed area (km2)
+
+Stream: Stream name (Bear, Paradise, or Zigzag)
+
+Fish: Fish present or not (0 = no = upper reach; 1 = yes = lower reach)
 
