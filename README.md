@@ -45,7 +45,7 @@ SubSize: Substrate size (mm) under which salamander was captured (length longest
 
 SubType: Substrate type under which salamander was captured (R = rock; W = wood, NA = missing information)
 
-Metamorph: Metamorphic individual (yes or no)
+Metamorph: Metamorphic individual (Y = yes or N = no)
 
 TailRemoved: % of tail missing (NA = missing information)
 
@@ -81,7 +81,7 @@ Remove: Remove capture ocassion due to incorrect ID or incomplete information
 
 
 
-Data on daily discharge across all 9 watersheds at Hubbard Brook from 1956 to 2022 is included as: HBEF_DailyStreamflow_1956-2022.csv. Column descriptions for this file include: 
+Data on daily discharge across all 9 watersheds at Hubbard Brook from 1956 to 2022: HBEF_DailyStreamflow_1956-2022.csv. Column descriptions for this file include: 
 
 Date: Date
 
@@ -91,7 +91,7 @@ Streamflow: Daily discharge (mm/day)
 
 
 
-Data on watershed area for stream reaches surveyed in salamander capture-recapture surveys: WatershedArea_for_SalamanderSurveys.csv. Each 500 meter reach was divided into 5 100 meter reaches, with watershed area calculated in the middle of each 100 meters (e.g. at 50, 150, 250, 350, and 450 m). Column descriptions for this file include: 
+Data on the watershed area for stream reaches surveyed in salamander capture-recapture surveys: WatershedArea_for_SalamanderSurveys.csv. Each 500 meter reach was divided into 5 100 meter reaches, with watershed area calculated in the middle of each 100 meters (e.g. at 50, 150, 250, 350, and 450 m). Column descriptions for this file include: 
 
 Site: site abbreviation (l at beginning = lower; u at beginning = upper; b = bear; par = paradise; zz = zigzag; number at end = longtidunal location along 500 m reach). 
 
