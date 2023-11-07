@@ -101,3 +101,5 @@ Stream: Stream name (Bear, Paradise, or Zigzag)
 
 Fish: Fish present or not (0 = no = upper reach; 1 = yes = lower reach)
 
+
+Last, we uploaded 4 different photos of captured salamanders (P1130055, P1130040, P1130048, and P1130053) to demonstrate how we calculated the snout-vent-length for each individual captured. 
