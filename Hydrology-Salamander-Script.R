@@ -22,7 +22,7 @@ library(mblm)
 
 #####################################################################################
 
-# make sure to set working directory
+# make sure to set working directory first
 sal.dat<-read.csv("HubbardBrook_SalamanderCaptureRecapture.csv",
                   header=TRUE) # read in full mark-recapture dataset
 
@@ -32,8 +32,6 @@ sal.dat2 <- sal.dat %>%
                            Stage == "L" ~ "L",
                            Stage == "A" ~ "A"))%>%
   filter(Remove == "N")%>% # remove individuals marked to remove previously
-  filter(Stream != "Canyon")%>% # excluding canyon and cascade as they were only surveyed for 3 yrs
-  filter(Stream != "Cascade")%>%
   mutate(LocRound = case_when(RawLongLoc < 100 ~ 50, # rounding meters to nearest 100m
                               RawLongLoc < 200 ~ 150,
                               RawLongLoc < 300 ~ 250,
@@ -150,7 +148,7 @@ sal.dat2 <- sal.dat2 %>%
 
 
 # bring in watershed area data
-area<-read.csv("data/WatershedArea_for_SalamanderSurveys.csv",
+area<-read.csv("WatershedArea_for_SalamanderSurveys.csv",
                header=TRUE)
 
 # join watershed area to capture data
@@ -243,11 +241,11 @@ CMR_Q1_3 <- CMR_Q_all %>%
   mutate(jday = yday(DATE))%>%
   mutate(Year = year(DATE))%>%
   mutate(surv_yr = case_when(Month < 7 ~ Year -1,
-                             Month >= 7 ~ Year)) # need "year" to go from july 1st to following june 30
+                             Month >= 7 ~ Year)) # need "year" to go from July 1st to following June 30
 
 Qmovingavg <- zoo::rollapplyr(CMR_Q1_3$Streamflow,  7, mean,  align='right') # 7day low flow from 6 days prior
 # need to add 6 NAs to Qmovingavg
-Qmovingavg <- c( rep(NA,6),Qmovingavg)
+Qmovingavg <- c( rep(NA,6),Qmovingavg) 
 CMR_Q1_3$Qmovingavg <- Qmovingavg
 
 CMR_Q1_3 <- CMR_Q1_3 %>%
@@ -295,6 +293,15 @@ CMR_Q1_7 <- CMR_Q1_7 %>%
 CMR_Q1<-full_join(CMR_Q1_3, CMR_Q1_6)
 CMR_Q1<-full_join(CMR_Q1, CMR_Q1_7)
 
+# looking at long term trends (min)
+CMR_Q1_trend<-CMR_Q1 %>%
+  ungroup()%>%
+  group_by(WS,surv_yr)%>%
+  summarise(Q1 = min(Qmovingavg)) # get lowest flow from each year
+
+ggplot(data=CMR_Q1_trend, aes(x=surv_yr, y=Q1, color=factor(WS)))+
+  geom_point()
+
 
 ## calculate recurrence intervals for low flow events for each year
 # for weir 3 first
@@ -320,8 +327,6 @@ CMR_Q1_weir7<-CMR_Q1_trend%>%
   arrange(Q1)%>% # arrange by ascending order
   mutate(rank = seq(1,57,1))%>% # create rank by order
   mutate(RI = 58/rank)
-# 2016 was dry (6 yr recurrence interval) for 0.026000000 mm/day
-# 2020 also fairly dry (4 yr recurrence interval) for 0.029571429 mm/day
 
 
 
@@ -402,6 +407,7 @@ sal.process=process.data(capt.hist,
                          time.intervals=time.intervals,
                          groups=c("Stream","Fish")) # have to include factors
 names(sal.process)
+
 head(sal.process$data) # take a look at the data
 
 
@@ -772,7 +778,7 @@ pred.top2<-full_join(pred.top2,prediction.top.zz)
 
 # transform discharge back to Q1 to interpret 
 # scale subtracts the mean and divides by the sd
-# so multifply by sd then add mean to transform back
+# so multiply by sd then add mean to transform back
 mlow<-mean(yrs_Q1$Q1)
 slow<-sd(yrs_Q1$Q1)
 
@@ -899,7 +905,7 @@ deltamethod<- function (g, mean, cov, ses = TRUE)
   else new.covar
 }
 
-# individually compute the standard error for the real paramters with calls 
+# individually compute the standard error for the real parameters with calls 
 # to deltamethod using the inverse logit function 
 deltamethod(~exp(x1)/(1+exp(x1)),mean=betas$estimate[1],cov=betas$se[1]^2)
 
@@ -1444,7 +1450,7 @@ lowflow.lambda<-
 lowflow.lambda
 
 
-
+# combine plots
 duplot<-cowplot::plot_grid(highflow.lambda +
                              theme(),
                            
@@ -2047,7 +2053,7 @@ S.lowflow.highflow = list(formula = ~ Stream + Area + lflow*stratum+ hflow*strat
 
 
 
-# transition covariates 
+# transition co-variates 
 sal.ddl$Psi
 
 Psi.dot = list(formula = ~ Stream + Area, fixed=list(index=c(PsiLA.indices),
@@ -2605,26 +2611,11 @@ lowflow.psi.wdat
 
 
 
-### combing larval and adult recruitment into one figure 
-duplot2<-cowplot::plot_grid(lowflow.f.wdat.dubs +
-                              theme(axis.title.x = element_blank()),
-                            
-                            lowflow.psi.wdat.nolegend +
-                              theme(axis.title.x = element_blank()),
-                            
-                            
-                            nrow = 1, labels = "auto", align = "v")
-duplot2 <- cowplot::add_sub(duplot2, expression(paste("Lowest Discharge (mm ", day^-1,")"),
-                                                hjust = 0.25, fontface="plain", size=12))
-cowplot::ggdraw(duplot2)
-
-
-
-
-
 
 
 # flood effect on adult recruitment with data
+transition.result.wq99<-left_join(transition.result,yrs_Q99)
+
 highflow.psi.wdat <- ggplot(psi.flood.prediction, aes(x = Q99, y = estimate,color=Stream)) +
   
   geom_ribbon(aes(ymin = lcl, ymax = ucl,fill=Stream), alpha = 0.15,colour=NA) +
@@ -2649,18 +2640,6 @@ highflow.psi.wdat <- ggplot(psi.flood.prediction, aes(x = Q99, y = estimate,colo
 # print the plot
 highflow.psi.wdat
 
-
-
-### combing the effect of high and low flow on adult recruitment into one figure 
-duplot.ar<-cowplot::plot_grid(highflow.psi.wdat +
-                                theme(),
-                              
-                              lowflow.psi.wdat.nolegend +
-                                theme(axis.title.y = element_blank()),
-                              
-                              
-                              nrow = 1, labels = "auto", align = "v")
-duplot.ar
 
 
 
