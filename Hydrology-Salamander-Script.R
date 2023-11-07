@@ -1617,8 +1617,6 @@ sal.dat2 <- sal.dat %>%
                            Stage == "L" ~ "L",
                            Stage == "A" ~ "A"))%>%
   filter(Remove == "N")%>% # remove individuals marked to remove previously
-  filter(Stream != "Canyon")%>%
-  filter(Stream != "Cascade")%>%
   mutate(LocRound = case_when(RawLongLoc < 100 ~ 50,
                               RawLongLoc < 200 ~ 150,
                               RawLongLoc < 300 ~ 250,
