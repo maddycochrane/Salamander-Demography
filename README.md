@@ -93,7 +93,7 @@ Streamflow: Daily discharge (mm/day)
 
 Data on the watershed area for stream reaches surveyed in salamander capture-recapture surveys: WatershedArea_for_SalamanderSurveys.csv. Each 500 meter reach was divided into 5 100 meter reaches, with watershed area calculated in the middle of each 100 meters (e.g. at 50, 150, 250, 350, and 450 m). Column descriptions for this file include: 
 
-Site: site abbreviation (l at beginning = lower; u at beginning = upper; b = bear; par = paradise; zz = zigzag; number at end = longtidunal location along 500 m reach). 
+Site: site abbreviation (l at beginning = lower; u at beginning = upper; b = bear; par = paradise; zz = zigzag; number at end = longitudinal location along 500 m reach). 
 
 Area_km2: Watershed area (km2)
 
@@ -102,4 +102,4 @@ Stream: Stream name (Bear, Paradise, or Zigzag)
 Fish: Fish present or not (0 = no = upper reach; 1 = yes = lower reach)
 
 
-Last, we uploaded 4 different photos of captured salamanders (P1130055, P1130040, P1130048, and P1130053) to demonstrate how we calculated the snout-vent-length for each individual captured. 
+Last, we uploaded 4 different photos of captured salamanders (photos: P1130055, P1130040, P1130048, and P1130053) to demonstrate how we calculated the snout-vent-length for each individual captured. 
