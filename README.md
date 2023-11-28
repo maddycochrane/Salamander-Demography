@@ -1,5 +1,5 @@
 # Salamander-Demography
-This repository holds the R script and data used for analyses in "Stage-specific demographic effects of hydrologic variation in a stream salamander." This script was created by Madaline Cochrane in November, 2023. 
+This repository holds the R script and data used for analyses in "Stage-specific demographic effects of hydrologic variation in a stream salamander." This script was created by Madaline Cochrane in November, 2023. Contact email: maddy.cochrane@gmail.com
 
 The Hydrology-Salamander-Script, includes R code to run both a robust-design Pradel model and robust-design multi-state Cormack-Jolly-Seber model using RMark. The script begins by manipulating salamander capture data into encounter histories and characterizing annual flow metrics. Then this data is used to estimate different demographic vital rates, first with a Pradel model and then with a multi-state CJS model.
 
