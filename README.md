@@ -7,7 +7,7 @@ The salamander mark-recapture data used in this analysis are previously publishe
 
 However, we also included all data called in this R script in this repository. R packages used in this analysis include dplyr (version 1.1.0), tidyr (version 1.3.0), RMmark (version 3.0.0), ggplot2 (version 3.4.2), lubridate (version 1.9.1), ggprism (version 1.0.4), and mblm (version 0.12.1). 
 
-Salamander capture-recapture data is found at HubbardBrook_SalamanderCaptureRecapture.csv. The file HB_Salamander_robustCJS_edit.csv contains the same capture-recapture information, except  is edited according to the assumptions of a multi-state CJS model instead of a Pradel model. Specifically, this includes changing the stage of salamanders on 7 ocassions so that they did not change from a larvae to an adult across secondary surveys. The column descriptions for these data files include: 
+Salamander capture-recapture data is found at HubbardBrook_SalamanderCaptureRecapture.csv. The file HB_Salamander_robustCJS_edit.csv contains the same capture-recapture information, except  is edited according to the assumptions of a multi-state CJS model instead of a Pradel model. Specifically, this includes changing the stage of salamanders on 7 ocassions so that they did not change from a larva to an adult across secondary surveys. The column descriptions for these data files include: 
 
 ElastomerID: visual implant elastomer ID (NA = no elastomer ID for this individual)
 
